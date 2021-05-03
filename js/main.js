@@ -17,42 +17,29 @@ const app = new Vue ({
         
     },
     created(){
-        this.generaMail();
+        this.assegnaMail();
     },
     methods:{
 
-        // assegnaMail(){
+        assegnaMail(){
 
-        //     this.mails.forEach((element) => {
+            this.mails.forEach((element) => {
 
-        //         generaMail(){
-        //             axios.get(' https://flynn.boolean.careers/exercises/api/random/mail ')
-        //             .then (response => {
-        //                 response.data.response;
-        //             })
-        //             .catch(error => {
-        //                 console.log('Errore: ', error);
+                element = this.generaMail();
+                console.log(element)
 
-        //             })
-        //         }
-                
-
-        //     })
-        //     console.log(this.mails)
-        // },
+            });
+            console.log(this.mails)
+        },
 
         generaMail(){
             axios.get(' https://flynn.boolean.careers/exercises/api/random/mail ')
             .then (response => {
-                // this.mails.forEach(mail =>{
-                //   mail =   response.data.response
-                // })
-                console.log(response.data.response)
-                
+                response.data.response
             })
             .catch(error => {
                 console.log('Errore: ', error)
             });
         },
-     },
+    },
 });
