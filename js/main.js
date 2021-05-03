@@ -3,18 +3,19 @@ const app = new Vue ({
     data: {
 
         mails: [
-             '',
-             '',
-             '',
-             '',
-             '',
-             '',
-             '',
-             '',
-             '',
-             '',
+             
          ],
         
+    },
+    computed:{
+
+        showMail(){
+            if( this.mails.length >= 10){
+            return true;
+        }
+
+        return false;
+    }
     },
     created(){
         this.assegnaMail();
@@ -23,23 +24,22 @@ const app = new Vue ({
 
         assegnaMail(){
 
-            this.mails.forEach((element) => {
-
-                element = this.generaMail();
-                console.log(element)
-
-            });
+            for( let i =0; i < 10; i++ ){
+                
+                axios.get(' https://flynn.boolean.careers/exercises/api/random/mail ')
+                .then (response => {
+                this.mails.push(response.data.response);
+                // console.log(this.mail)
+                })
+                .catch(error => {
+                console.log('Errore: ', error)
+                });
+            }
+            
             console.log(this.mails)
         },
 
-        generaMail(){
-            axios.get(' https://flynn.boolean.careers/exercises/api/random/mail ')
-            .then (response => {
-                response.data.response
-            })
-            .catch(error => {
-                console.log('Errore: ', error)
-            });
-        },
+       
     },
+    
 });
